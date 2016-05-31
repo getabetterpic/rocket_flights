@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160531233922) do
+ActiveRecord::Schema.define(version: 20160531234331) do
+
+  create_table "flights", force: :cascade do |t|
+    t.integer  "rocket_id"
+    t.integer  "motor_id"
+    t.boolean  "successful"
+    t.text     "notes"
+    t.datetime "flight_date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "flights", ["motor_id"], name: "index_flights_on_motor_id"
+  add_index "flights", ["rocket_id"], name: "index_flights_on_rocket_id"
 
   create_table "motors", force: :cascade do |t|
     t.decimal  "diameter_in_mm", null: false

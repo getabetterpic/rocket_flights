@@ -1,4 +1,5 @@
 class Flight < ActiveRecord::Base
   belongs_to :rocket
-  belongs_to :motor
+  has_many :flight_motors
+  has_many :motors, through: :flight_motors
 end

@@ -8,8 +8,10 @@ RSpec.describe Rocket, type: :model do
   context '#successful_flights' do
     let(:rocket) { FactoryGirl.create(:rocket) }
     let(:motor) { FactoryGirl.create(:motor) }
-    let!(:flight_1) { FactoryGirl.create(:flight, successful: true, rocket: rocket, motor: motor) }
-    let!(:flight_2) { FactoryGirl.create(:flight, successful: false, rocket: rocket, motor: motor) }
+    let!(:flight_1) { FactoryGirl.create(:flight, successful: true, rocket: rocket) }
+    let!(:flight_2) { FactoryGirl.create(:flight, successful: false, rocket: rocket) }
+    let(:flight_motors_1) { FactoryGirl.create(:flight_motor, flight: flight_1, motor: motor) }
+    let(:flight_motors_2) { FactoryGirl.create(:flight_motor, flight: flight_2, motor: motor) }
 
     it 'returns only successful flights' do
       expect(rocket.successful_flights.count).to eq(1)

@@ -1,3 +1,5 @@
 class RocketResource < JSONAPI::Resource
-  attributes :name, :manufacturer, :flights
+  attributes :name, :manufacturer
+
+  has_many :flights
 end

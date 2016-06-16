@@ -70,10 +70,12 @@ GEM
     minitest (5.9.0)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    pg (0.18.4)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    puma (3.4.0)
     rack (1.6.4)
     rack-cors (0.4.0)
     rack-test (0.6.3)
@@ -150,7 +152,9 @@ DEPENDENCIES
   byebug
   factory_girl_rails (~> 4.0)
   jsonapi-resources
+  pg
   pry
+  puma
   rack-cors
   rails (= 4.2.6)
   rspec-rails (~> 3.4)

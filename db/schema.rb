@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160602115002) do
+ActiveRecord::Schema.define(version: 20160616141829) do
 
   create_table "flight_motors", force: :cascade do |t|
     t.integer  "flight_id"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20160602115002) do
     t.datetime "flight_date"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "altitude"
   end
 
   add_index "flights", ["motor_id"], name: "index_flights_on_motor_id"
@@ -41,6 +42,7 @@ ActiveRecord::Schema.define(version: 20160602115002) do
     t.string   "name",           null: false
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "manufacturer"
   end
 
   create_table "rockets", force: :cascade do |t|

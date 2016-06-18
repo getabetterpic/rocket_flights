@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160616141829) do
+ActiveRecord::Schema.define(version: 20160618084407) do
 
   create_table "flight_motors", force: :cascade do |t|
     t.integer  "flight_id"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 20160616141829) do
     t.datetime "updated_at",     null: false
     t.string   "manufacturer"
   end
+
+  add_index "motors", ["name", "manufacturer"], name: "index_motors_on_name_and_manufacturer", unique: true
 
   create_table "rockets", force: :cascade do |t|
     t.string   "name",               null: false

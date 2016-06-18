@@ -3,4 +3,16 @@ class Motor < ActiveRecord::Base
   has_many :flight_motors
   has_many :flights, through: :flight_motors
   has_many :rockets, through: :flights
+
+  before_validation :upcase_name
+
+  validates_each :name do |record, attr, value|
+    if name =~ /[^A-Z0-9\-\/]*/
+      record.errors.add(:name, 'cannot contain any characters except A-Z, 0-9, -, and /')
+    end
+  end
+
+  def upcase_name
+    name.upcase! if name.present?
+  end
 end

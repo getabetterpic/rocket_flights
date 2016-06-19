@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160618113018) do
+ActiveRecord::Schema.define(version: 20160619123041) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+  enable_extension "citext"
 
   create_table "flight_motors", force: :cascade do |t|
     t.integer  "flight_id"
@@ -20,8 +24,8 @@ ActiveRecord::Schema.define(version: 20160618113018) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "flight_motors", ["flight_id"], name: "index_flight_motors_on_flight_id"
-  add_index "flight_motors", ["motor_id"], name: "index_flight_motors_on_motor_id"
+  add_index "flight_motors", ["flight_id"], name: "index_flight_motors_on_flight_id", using: :btree
+  add_index "flight_motors", ["motor_id"], name: "index_flight_motors_on_motor_id", using: :btree
 
   create_table "flights", force: :cascade do |t|
     t.integer  "rocket_id"
@@ -34,8 +38,8 @@ ActiveRecord::Schema.define(version: 20160618113018) do
     t.integer  "altitude"
   end
 
-  add_index "flights", ["motor_id"], name: "index_flights_on_motor_id"
-  add_index "flights", ["rocket_id"], name: "index_flights_on_rocket_id"
+  add_index "flights", ["motor_id"], name: "index_flights_on_motor_id", using: :btree
+  add_index "flights", ["rocket_id"], name: "index_flights_on_rocket_id", using: :btree
 
   create_table "motors", force: :cascade do |t|
     t.decimal  "diameter_in_mm", null: false
@@ -45,7 +49,7 @@ ActiveRecord::Schema.define(version: 20160618113018) do
     t.string   "manufacturer"
   end
 
-  add_index "motors", ["name", "manufacturer"], name: "index_motors_on_name_and_manufacturer", unique: true
+  add_index "motors", ["name", "manufacturer"], name: "index_motors_on_name_and_manufacturer", unique: true, using: :btree
 
   create_table "rockets", force: :cascade do |t|
     t.string   "name",               null: false
@@ -60,6 +64,14 @@ ActiveRecord::Schema.define(version: 20160618113018) do
     t.datetime "updated_at",         null: false
   end
 
-  add_index "rockets", ["name", "manufacturer"], name: "index_rockets_on_name_and_manufacturer", unique: true
+  add_index "rockets", ["name", "manufacturer"], name: "index_rockets_on_name_and_manufacturer", unique: true, using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.citext   "email",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
 
 end

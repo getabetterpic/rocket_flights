@@ -6,7 +6,7 @@ Knock.setup do |config|
   ## The attribute used to uniquely identify a user.
   ##
   ## Default:
-  # config.handle_attr = :email
+  config.handle_attr = :auth0_user_id
 
   ## Current user retrieval from handle when signing in
   ## --------------------------------------------------
@@ -33,7 +33,7 @@ Knock.setup do |config|
   ## You must raise ActiveRecord::RecordNotFound if the resource cannot be retrieved.
   ##
   ## Default:
-  # config.current_user_from_token = -> (claims) { User.find claims['sub'] }
+  config.current_user_from_token = -> (claims) { User.find_by! auth0_user_id: claims['sub'] }
 
 
   ## Expiration claim

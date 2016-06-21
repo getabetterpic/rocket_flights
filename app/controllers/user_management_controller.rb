@@ -3,15 +3,12 @@ class UserManagementController < ApplicationController
   skip_before_filter :ensure_correct_media_type
 
   def update
+    status = @user.new_record? ? :created : :ok
     if @user.save
-      render json: {}, status: :success
+      render json: {}, status: status
     else
-      render json: @user.errors, status: :unprocessable
+      render json: @user.errors, status: :unprocessable_entity
     end
-  end
-
-  def destroy
-    @user.destroy
   end
 
   private

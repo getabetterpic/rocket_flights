@@ -18,6 +18,9 @@ gem 'awesome_print'
 gem 'jsonapi-resources'
 gem 'rack-cors', :require => 'rack/cors'
 
+# For auth0
+gem 'knock', '~> 1.4.2'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160622144343) do
+ActiveRecord::Schema.define(version: 20160622150038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,16 @@ ActiveRecord::Schema.define(version: 20160622144343) do
 
   add_index "rockets", ["name", "manufacturer"], name: "index_rockets_on_name_and_manufacturer", unique: true, using: :btree
 
+  create_table "user_rockets", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "rocket_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_rockets", ["rocket_id"], name: "index_user_rockets_on_rocket_id", using: :btree
+  add_index "user_rockets", ["user_id"], name: "index_user_rockets_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.citext   "email",         null: false
     t.datetime "created_at",    null: false
@@ -76,4 +86,6 @@ ActiveRecord::Schema.define(version: 20160622144343) do
   add_index "users", ["auth0_user_id", "email"], name: "index_users_on_auth0_user_id_and_email", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
 
+  add_foreign_key "user_rockets", "rockets"
+  add_foreign_key "user_rockets", "users"
 end

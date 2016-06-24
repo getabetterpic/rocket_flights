@@ -16,5 +16,22 @@ RSpec.describe Rocket, type: :model do
     it 'returns only successful flights' do
       expect(rocket.successful_flights.count).to eq(1)
     end
+
+    context 'when validating name' do
+      it 'validates uniqueness of name scoped to manufacturer' do
+        rocket1 = FactoryGirl.build(:rocket, name: '4DF', manufacturer: 'U.S. Rockets')
+        rocket2 = FactoryGirl.build(:rocket, name: '4DF', manufacturer: 'U.S. Rockets')
+        expect(rocket1.save).to be true
+        rocket2.save
+        expect(rocket2.errors.full_messages).to include('Name has already been taken')
+      end
+
+      it 'allows the same name for different manufacturers' do
+        rocket1 = FactoryGirl.build(:rocket, name: '4DF', manufacturer: 'U.S. Rockets')
+        rocket2 = FactoryGirl.build(:rocket, name: '4DF', manufacturer: 'Estes')
+        expect(rocket1.save).to be true
+        expect(rocket2.save).to be true
+      end
+    end
   end
 end

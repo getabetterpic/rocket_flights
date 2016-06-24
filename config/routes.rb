@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   jsonapi_resources :flights
   jsonapi_resources :flight_motors
   jsonapi_resources :users, only: [:index]
+  jsonapi_resources :user_flights
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

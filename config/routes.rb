@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post 'images' => 'images#create'
   put 'user_management' => 'user_management#update'
   jsonapi_resources :rockets
   jsonapi_resources :motors

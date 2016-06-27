@@ -1,11 +1,12 @@
 class ImagesController < ApplicationController
-  skip_before_filter :ensure_correct_media_type
+  before_action :authenticate, only: [:create, :update, :delete]
+  skip_before_filter :ensure_correct_media_type, only: [:create]
+
   def create
-    rocket = Rocket.find(params['rocket']['id'])
+    rocket = Rocket.find(params['rocket_id'])
     if rocket && params['file']
       image = Image.new(image: params['file'])
       rocket.images << image if image.save
-      ap image
     else
       render json: {}, status: :unprocessable_entity and return
     end

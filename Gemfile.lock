@@ -38,6 +38,12 @@ GEM
       tzinfo (~> 1.1)
     arel (6.0.3)
     awesome_print (1.6.1)
+    aws-sdk (2.3.16)
+      aws-sdk-resources (= 2.3.16)
+    aws-sdk-core (2.3.16)
+      jmespath (~> 1.0)
+    aws-sdk-resources (2.3.16)
+      aws-sdk-core (= 2.3.16)
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -60,7 +66,10 @@ GEM
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
+    jmespath (1.2.4)
+      json_pure (>= 1.8.1)
     json (1.8.3)
+    json_pure (1.8.3)
     jsonapi-resources (0.7.0)
       rails (>= 4.0)
     jwt (1.5.4)
@@ -166,6 +175,7 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
+  aws-sdk (~> 2.3)
   byebug
   factory_girl_rails (~> 4.0)
   jsonapi-resources

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  post 'images' => 'images#create'
   put 'user_management' => 'user_management#update'
   jsonapi_resources :rockets
   jsonapi_resources :motors
@@ -8,6 +7,8 @@ Rails.application.routes.draw do
   jsonapi_resources :users, only: [:index]
   jsonapi_resources :user_flights
   jsonapi_resources :user_rockets
+  jsonapi_resources :images, except: [:create]
+  post 'images' => 'images#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -7,4 +7,8 @@ class Rocket < ActiveRecord::Base
   def successful_flights
     flights.where(successful: true)
   end
+
+  def add_image(image)
+    self.images << image if image.persisted?
+  end
 end

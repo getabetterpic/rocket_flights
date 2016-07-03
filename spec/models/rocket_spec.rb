@@ -33,5 +33,21 @@ RSpec.describe Rocket, type: :model do
         expect(rocket2.save).to be true
       end
     end
+
+    context 'when adding images' do
+      let(:rocket) { FactoryGirl.create(:rocket) }
+      let(:image) { FactoryGirl.create(:image) }
+      it 'adds a valid image' do
+        expect(rocket.images.count).to eq(0)
+        rocket.add_image(image)
+        expect(rocket.images.count).to eq(1)
+      end
+
+      it 'does not add an image if it is not persisted' do
+        image2 = FactoryGirl.build(:image)
+        rocket.add_image(image2)
+        expect(rocket.images.count).to eq(0)
+      end
+    end
   end
 end

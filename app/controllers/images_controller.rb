@@ -6,15 +6,19 @@ class ImagesController < ApplicationController
     rocket = Rocket.find(params['rocket_id'])
     if rocket && params['file']
       image = Image.new(image: params['file'])
-      rocket.images << image if image.save
+      rocket.add_image(image) if image.save
     else
       render json: {}, status: :unprocessable_entity and return
     end
 
     if rocket.save
-      render json: {}, status: :created and return
+      image_serializer = JSONAPI::ResourceSerializer.new(ImageResource)
+      image_serialized = image_serializer.serialize_to_hash(ImageResource.new(image, nil))
+      render json: image_serialized, status: :created and return
     else
-      render json: rocket.errors, status: :unprocessable_entity and return
+      rocket_serializer = JSONAPI::ResourceSerializer.new(RocketResource)
+      rocket_seralized = rocket_serializer.serialize_to_hash(RocketResource.new(rocket, nil))
+      render json: rocket_seralized, status: :unprocessable_entity and return
     end
   end
 end
